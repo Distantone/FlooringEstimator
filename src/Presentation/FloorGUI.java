@@ -1,23 +1,11 @@
 package Presentation;
 
-
-
-
-import Business.Query;
-import Business.DBConnector;
 import Business.DataIO;
 import Business.Floor;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 
 /**
