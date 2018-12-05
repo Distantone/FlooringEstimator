@@ -7,7 +7,6 @@ import Business.Query;
 import Business.DBConnector;
 import Business.DataIO;
 import Business.Floor;
-import Business.requireErrors;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,13 +32,9 @@ public class FloorGUI extends javax.swing.JFrame {
     /*******DEBUG*******/
     Boolean DEBUG = false;
     /*******************/
-    
 
-    
     //create objects
     Floor floor = new Floor();
-    requireErrors RE = new requireErrors();
-    
     DataIO data = new DataIO();
     
     
@@ -338,33 +333,28 @@ public class FloorGUI extends javax.swing.JFrame {
         myLength = Double.parseDouble(lenTextField.getText());
         myWidth = Double.parseDouble(widTextField.getText());
         
-            if (nameTextField.getText().isEmpty())
-            {
-                RE.getNameError();
+            if (nameTextField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Must Enter a Name","Name is Missing",JOptionPane.ERROR_MESSAGE);
                 nameTextField.requestFocus();
                 return;
             }
-            if (addrTextField.getText().isEmpty())
-            {
-                RE.getaddrError();
+            if (addrTextField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Must Enter an Address","Address is Missing",JOptionPane.ERROR_MESSAGE);
                 addrTextField.requestFocus();
                 return;
             }
-            if (lenTextField.getText().isEmpty())
-            {
+            if (lenTextField.getText().isEmpty()){
                 lenTextField.requestFocus();
                 return;
             }
-            if (widTextField.getText().isEmpty())
-            {
+            if (widTextField.getText().isEmpty()){
                 widTextField.requestFocus();
                 return;
             }
 
             //check if none are selected
-            if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected())
-            {
-                RE.neitherSelected();
+            if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()){
+                JOptionPane.showMessageDialog(null, "Please select A floor type","No Floor Type Selected",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
@@ -401,28 +391,25 @@ public class FloorGUI extends javax.swing.JFrame {
         myLength = Double.parseDouble(lenTextField.getText());
         myWidth = Double.parseDouble(widTextField.getText());
         //double checking that buttons are selected or not or even if both (shouln not happen but o well)
-        if (carpetRadBtn.isSelected())
-        {
+        if (carpetRadBtn.isSelected()){
             cost = 10;
             floorType = "Carpet";
         }
-        if (woodRadBtn.isSelected())
-        {
+        if (woodRadBtn.isSelected()){
             cost = 20;
             floorType = "Wood";
         }
 
         //check if none are selected
-        if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected())
-        {
-            RE.neitherSelected();
+        if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()){
+            JOptionPane.showMessageDialog(null, "Please select A floor type","No Floor Type Selected",JOptionPane.ERROR_MESSAGE);
         }
-        if (lenTextField.getText().isEmpty())
-        {
+        if (lenTextField.getText().isEmpty()){
+            lenTextField.requestFocus();
             return;
         }
-        if (widTextField.getText().isEmpty())
-        {
+        if (widTextField.getText().isEmpty()){
+            widTextField.requestFocus();
             return;
         }
 
@@ -437,7 +424,6 @@ public class FloorGUI extends javax.swing.JFrame {
         data.setfArea(floorArea);
         //getting the total cost with the area
         Total = floor.getArea() * cost;
-
         //set variables for data
         data.setfType(floorType);
         data.setTotalCost(Total);
