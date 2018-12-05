@@ -10,39 +10,32 @@ public class Floor {
     private double length, width;
     
     //constructor
-    public Floor()
-    {
+    public Floor(){
         length = width = 0;
     }
     
     //getters
-    public double getLength()
-    {
+    public double getLength(){
         return length;
     }
-    public double getWidth()
-    {
+    public double getWidth(){
         return width;
     }
-    public double getArea()
-    {
+    public double getArea(){
         return length * width;
     }
     
  
     //setters
-    public void setLength(double len)
-    {
+    public void setLength(double len){
         length = len;
     }
-    public void setWidth(double wid)
-    {
+    public void setWidth(double wid){
         width = wid;
     }
     
     @Override
-    public String toString() 
-        {
+    public String toString(){
             return "Dimensions of room: (length = " + length + ", width = " + width + ")";
         }
     

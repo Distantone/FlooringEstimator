@@ -42,9 +42,6 @@ There is sufficient debugging code to check variables are passing between the GU
 
 * [NetBeans](https://netbeans.org/) - IDE used
 
-## Contributing
-
-*Dwight (friend that I bounced ides off of) and encouragement
 
 ## Versioning
 
@@ -59,7 +56,8 @@ Payden Boughton(DistantOne)
 Hat tip to thenewboston for tutorial videos on FXML
 https://www.youtube.com/channel/UCJbPGzawDH1njbqV-D5HqKw
 
-List of people who help encourage my education wouldnt be possible without them:
+List of people who help encourage my education wouldn't be possible without them:
+My Family
 Joe
 Zach
 Sam

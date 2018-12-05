@@ -15,7 +15,7 @@ import java.sql.SQLException;
  *
  * @author dista
  */
-public class DataIO {
+public class DataIO{
     String name;
     String addr;
     String fType;
@@ -24,23 +24,23 @@ public class DataIO {
     double length, width;
     
 
-    public DataIO() {
+    public DataIO(){
         
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getAddr() {
+    public String getAddr(){
         return addr;
     }
 
-    public void setAddr(String addr) {
+    public void setAddr(String addr){
         this.addr = addr;
     }
 
@@ -52,19 +52,19 @@ public class DataIO {
         return fType;
     }
 
-    public double getfArea() {
+    public double getfArea(){
         return fArea;
     }
 
-    public void setfArea(double fArea) {
+    public void setfArea(double fArea){
         this.fArea = fArea;
     }
 
-    public double getTotalCost() {
+    public double getTotalCost(){
         return totalCost;
     }
 
-    public void setTotalCost(double totalCost) {
+    public void setTotalCost(double totalCost){
         this.totalCost = totalCost;
     }
 

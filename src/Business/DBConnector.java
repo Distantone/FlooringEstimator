@@ -20,16 +20,13 @@ private final String url = "jdbc:mysql://localhost:3306/cis355a";
 
     public DBConnector(){}
     
-    public String getlogin()
-    {
+    public String getlogin(){
         return login;
     }
-    public String getpassword()
-    {
+    public String getpassword(){
         return password;
     }
-    public String geturl()
-    {
+    public String geturl(){
         return url;
     }
     
