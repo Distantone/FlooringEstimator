@@ -386,7 +386,7 @@ public class FloorGUI extends javax.swing.JFrame {
     private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
         //links to github
         try { 
-         String url = "https://github.com/Distantone/FlooringCalculator/tree/master/src";
+         String url = "https://github.com/Distantone/FlooringEstimator/tree/master/src";
          java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
        }
        catch (java.io.IOException e) {
