@@ -1,31 +1,21 @@
 package Presentation;
 
+import Business.Customer;
 import Business.DataIO;
 import Business.Floor;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
  *
  * @author Payden Boughton
  */
-public class FloorGUI extends javax.swing.JFrame {
+    public class FloorGUI extends javax.swing.JFrame {
 
-    double myLength, myWidth, cost, Total, floorArea;
-    String floorType,cName,cAddr;
-    
-    /*******DEBUG*******/
-    Boolean DEBUG = false;
-    /*******************/
-
-    //create objects
-    Floor floor = new Floor();
-    DataIO data = new DataIO();
-    
-    
     public FloorGUI() {
         initComponents();
         //centers the GUI
@@ -42,14 +32,14 @@ public class FloorGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         btnGroupFloor = new javax.swing.ButtonGroup();
-        jTabbedPane6 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        tPCustomer = new javax.swing.JTabbedPane();
+        jpCustomerInfo = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
+        lblAddr = new javax.swing.JLabel();
         addrTextField = new javax.swing.JTextField();
         nameTextField = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jpFloorSelector = new javax.swing.JPanel();
+        lblFloorType = new javax.swing.JLabel();
         woodRadBtn = new javax.swing.JRadioButton();
         carpetRadBtn = new javax.swing.JRadioButton();
         btnCalc = new javax.swing.JButton();
@@ -58,62 +48,66 @@ public class FloorGUI extends javax.swing.JFrame {
         lblLength = new javax.swing.JLabel();
         lblWidth = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel3 = new javax.swing.JPanel();
+        jpOrder = new javax.swing.JPanel();
         costTextField = new javax.swing.JTextField();
         btnOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaOrderSummary = new javax.swing.JTextArea();
         lblSummary = new javax.swing.JLabel();
         areaTextField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblFloorArea = new javax.swing.JLabel();
+        lblFloorCost = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customerTable = new javax.swing.JTable();
         lblFloorEstimatorLogo = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        btnLoad = new javax.swing.JButton();
+        jMenuBar = new javax.swing.JMenuBar();
+        jMenu = new javax.swing.JMenu();
         btnGit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Please Enter Your Name");
+        lblName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblName.setText("Please Enter Your Name");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Please Enter Your Address");
+        lblAddr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblAddr.setText("Please Enter Your Address");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpCustomerInfoLayout = new javax.swing.GroupLayout(jpCustomerInfo);
+        jpCustomerInfo.setLayout(jpCustomerInfoLayout);
+        jpCustomerInfoLayout.setHorizontalGroup(
+            jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCustomerInfoLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nameTextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAddr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addrTextField))
                 .addGap(44, 44, 44))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jpCustomerInfoLayout.setVerticalGroup(
+            jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCustomerInfoLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
+                .addGroup(jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAddr)
+                    .addComponent(lblName))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
 
-        jTabbedPane6.addTab("Customer Information", jPanel1);
+        tPCustomer.addTab("Customer Information", jpCustomerInfo);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Please Select Floor Type");
+        lblFloorType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFloorType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFloorType.setText("Please Select Floor Type");
 
         btnGroupFloor.add(woodRadBtn);
         woodRadBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -137,44 +131,43 @@ public class FloorGUI extends javax.swing.JFrame {
         lblWidth.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblWidth.setText("Enter Width");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpFloorSelectorLayout = new javax.swing.GroupLayout(jpFloorSelector);
+        jpFloorSelector.setLayout(jpFloorSelectorLayout);
+        jpFloorSelectorLayout.setHorizontalGroup(
+            jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jSeparator2)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpFloorSelectorLayout.createSequentialGroup()
+                        .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLength)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                                 .addComponent(lenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                                         .addGap(71, 71, 71)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(carpetRadBtn)
-                                            .addComponent(jLabel1)
+                                            .addComponent(lblFloorType)
                                             .addComponent(woodRadBtn)))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                                         .addGap(261, 261, 261)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblWidth)
                                             .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addContainerGap(20, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 10, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jpFloorSelectorLayout.setVerticalGroup(
+            jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblFloorType)
                 .addGap(18, 18, 18)
                 .addComponent(woodRadBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,11 +175,11 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLength)
                     .addComponent(lblWidth))
                 .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,7 +187,7 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jTabbedPane6.addTab("Floor Type Selector", jPanel2);
+        tPCustomer.addTab("Floor Type Selector", jpFloorSelector);
 
         costTextField.setEditable(false);
 
@@ -217,47 +210,49 @@ public class FloorGUI extends javax.swing.JFrame {
 
         areaTextField.setEditable(false);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Floor Area");
+        lblFloorArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFloorArea.setText("Floor Area");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Floor Cost");
+        lblFloorCost.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFloorCost.setText("Floor Cost");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpOrderLayout = new javax.swing.GroupLayout(jpOrder);
+        jpOrder.setLayout(jpOrderLayout);
+        jpOrderLayout.setHorizontalGroup(
+            jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpOrderLayout.createSequentialGroup()
+                        .addComponent(lblFloorArea)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(lblFloorCost))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
+                        .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpOrderLayout.createSequentialGroup()
+                                .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jpOrderLayout.createSequentialGroup()
+                                .addGap(0, 168, Short.MAX_VALUE)
+                                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpOrderLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblSummary))
+                                    .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(71, 71, 71)))
+                        .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 178, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblSummary))
-                    .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(174, 174, 174))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jpOrderLayout.setVerticalGroup(
+            jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFloorArea)
+                    .addComponent(lblFloorCost))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
@@ -266,16 +261,57 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addComponent(lblSummary)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane6.addTab("Order", jPanel3);
+        tPCustomer.addTab("Order", jpOrder);
+
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "CustomerTable", "Customer Address", "Floor Type", "Floor Area", "Floor Cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(customerTable);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+        );
+
+        tPCustomer.addTab("Order Table", jPanel1);
 
         lblFloorEstimatorLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblFloorEstimatorLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentation/icon.png"))); // NOI18N
         lblFloorEstimatorLogo.setText("Flooring Estimator");
 
-        jMenu1.setText("Help");
+        btnLoad.setText("Load Order Table");
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
+            }
+        });
+
+        jMenu.setText("Help");
 
         btnGit.setText("Git ReadMe");
         btnGit.addActionListener(new java.awt.event.ActionListener() {
@@ -283,11 +319,11 @@ public class FloorGUI extends javax.swing.JFrame {
                 btnGitActionPerformed(evt);
             }
         });
-        jMenu1.add(btnGit);
+        jMenu.add(btnGit);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar.add(jMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,15 +331,19 @@ public class FloorGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblFloorEstimatorLogo)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jTabbedPane6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLoad)
+                .addContainerGap())
+            .addComponent(tPCustomer)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lblFloorEstimatorLogo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblFloorEstimatorLogo)
+                    .addComponent(btnLoad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane6))
+                .addComponent(tPCustomer))
         );
 
         pack();
@@ -311,16 +351,27 @@ public class FloorGUI extends javax.swing.JFrame {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // DONE add your handling code here:
+           String floorType = "",cName = "",cAddr = "";
+               double myLength, myWidth;
+        myLength = Double.parseDouble(lenTextField.getText());
+        myWidth = Double.parseDouble(widTextField.getText());
+        cName = nameTextField.getText();
+        cAddr = addrTextField.getText();
+        if (carpetRadBtn.isSelected()){
+            floorType = "Carpet";
+        }
+        if (woodRadBtn.isSelected()){
+            floorType = "Wood"; 
+        } 
+        Customer cus = new Customer(cName,cAddr,floorType,myLength,myWidth);
+        //calculating area
+        double floorArea = cus.getFloorArea();
+        
+        //verifying area is calculated then moving on to check if all fields are entered
         if(floorArea == 0){
             JOptionPane.showMessageDialog(rootPane, "Please Calulate your Total");
         }
         else{
-        //grab variables from textfields
-        cName = nameTextField.getText();
-        cAddr = addrTextField.getText();
-        myLength = Double.parseDouble(lenTextField.getText());
-        myWidth = Double.parseDouble(widTextField.getText());
-        
             if (nameTextField.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Must Enter a Name","Name is Missing",JOptionPane.ERROR_MESSAGE);
                 nameTextField.requestFocus();
@@ -331,14 +382,6 @@ public class FloorGUI extends javax.swing.JFrame {
                 addrTextField.requestFocus();
                 return;
             }
-            if (lenTextField.getText().isEmpty()){
-                lenTextField.requestFocus();
-                return;
-            }
-            if (widTextField.getText().isEmpty()){
-                widTextField.requestFocus();
-                return;
-            }
 
             //check if none are selected
             if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()){
@@ -346,19 +389,15 @@ public class FloorGUI extends javax.swing.JFrame {
                 return;
             }
             
-        //send data to dataIO class
-        data.setName(cName);
-        data.setAddr(cAddr);
+        DataIO data = new DataIO();
         //save the data
         try{
-        data.saveData();
+        data.saveData(cus);
         }   catch (SQLException ex) { 
                 Logger.getLogger(FloorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        //calls orderSum method
-        orderSum(cName,cAddr,floorType,floorArea,Total);
-        }
         
+        }   
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
@@ -374,56 +413,60 @@ public class FloorGUI extends javax.swing.JFrame {
 
     private void btnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcActionPerformed
         // DONE add your handling code here:
-
-        //grab myLength and myWidth from the textfields then convert string to double on mylength and myWidth
-        myLength = Double.parseDouble(lenTextField.getText());
-        myWidth = Double.parseDouble(widTextField.getText());
-        //double checking that buttons are selected or not or even if both (shouln not happen but o well)
-        if (carpetRadBtn.isSelected()){
-            cost = 10;
-            floorType = "Carpet";
-        }
-        if (woodRadBtn.isSelected()){
-            cost = 20;
-            floorType = "Wood";
-        }
-
-        //check if none are selected
+           String floorType;
+        
+        //check for empty fields
         if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()){
             JOptionPane.showMessageDialog(null, "Please select A floor type","No Floor Type Selected",JOptionPane.ERROR_MESSAGE);
         }
         if (lenTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter a Length","No Length Entered",JOptionPane.ERROR_MESSAGE);
             lenTextField.requestFocus();
             return;
         }
         if (widTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter a Length","No Length Entered",JOptionPane.ERROR_MESSAGE);
             widTextField.requestFocus();
             return;
         }
+        Customer cus = new Customer();
+        double myLength, myWidth;
 
+        //grab myLength and myWidth from the textfields then convert string to double on mylength and myWidth
+        myLength = Double.parseDouble(lenTextField.getText());
+        myWidth = Double.parseDouble(widTextField.getText());
         //set everything up to be calculated
-        floor.setLength(myLength);
-        floor.setWidth(myWidth);
-        //calulate area
-        floorArea = floor.getArea();
-        //set the text for area
-        areaTextField.setText("" + floorArea);
-        //send area to data
-        data.setfArea(floorArea);
-        //getting the total cost with the area
-        Total = floor.getArea() * cost;
-        //set variables for data
-        data.setfType(floorType);
-        data.setTotalCost(Total);
-        //formatting and converting total to a string
-        String TotalAsString = String.format("%.2f", Total);
+        cus.setLength(myLength);
+        cus.setWidth(myWidth);
+        if (carpetRadBtn.isSelected()){
+            floorType = "Carpet";
+            cus.setFloorType(floorType);
+        }
+        if (woodRadBtn.isSelected()){
+            floorType = "Wood";
+            cus.setFloorType(floorType);
+        }
+        areaTextField.setText("" + cus.getFloorArea());
+        String TotalAsString = String.format("%.2f", cus.getFloorCost());
         //set the total
         costTextField.setText("$" + TotalAsString);
 
-        if (DEBUG == true)
-        debugGo();
         JOptionPane.showMessageDialog(rootPane, "Total Has been Calculated on Order Tab");
     }//GEN-LAST:event_btnCalcActionPerformed
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel mod = new DefaultTableModel(new String[]{"CustomerName", "CustomerAddress", "FloorType", "FloorArea", "FloorCost"}, 0);
+        DataIO data = new DataIO();
+
+        try {
+            mod =  data.loadData();
+        } catch (SQLException ex) {
+            Logger.getLogger(FloorGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        customerTable.setModel(mod);
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     public void orderSum(String name,String addr,String fType, double fArea, double totalCost){
         //displays customer data in order summary
@@ -434,21 +477,6 @@ public class FloorGUI extends javax.swing.JFrame {
         + "Floor Area: " + fArea + "\n"
         + "Floor Cost: " + totalCost + "\n"       
         );
-    }
-    
-    public void checkVariables(double myLength, double myWidth, double area, double Total,double cost,String floorType) {
-       //for debugging purposes
-        System.out.println("Length : " + myLength);
-        System.out.println("Width : " + myWidth);
-        System.out.println("area: " + area);
-        System.out.println("Total : " + Total);
-        System.out.println("floor cost: " + cost);
-        System.out.println("floor floorType: " + floorType);
-    }
-    
-    public void debugGo (){
-    double debugarea = floor.getArea();
-    checkVariables(myLength,myWidth,debugarea,Total,cost,floorType);              
     }
 
     /**
@@ -492,28 +520,32 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnCalc;
     private javax.swing.JMenuItem btnGit;
     private javax.swing.ButtonGroup btnGroupFloor;
+    private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnOrder;
     private javax.swing.JRadioButton carpetRadBtn;
     private javax.swing.JTextField costTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JTable customerTable;
+    private javax.swing.JMenu jMenu;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTabbedPane jTabbedPane6;
+    private javax.swing.JPanel jpCustomerInfo;
+    private javax.swing.JPanel jpFloorSelector;
+    private javax.swing.JPanel jpOrder;
+    private javax.swing.JLabel lblAddr;
+    private javax.swing.JLabel lblFloorArea;
+    private javax.swing.JLabel lblFloorCost;
     private javax.swing.JLabel lblFloorEstimatorLogo;
+    private javax.swing.JLabel lblFloorType;
     private javax.swing.JLabel lblLength;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSummary;
     private javax.swing.JLabel lblWidth;
     private javax.swing.JTextField lenTextField;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JTabbedPane tPCustomer;
     private javax.swing.JTextArea txaOrderSummary;
     private javax.swing.JTextField widTextField;
     private javax.swing.JRadioButton woodRadBtn;

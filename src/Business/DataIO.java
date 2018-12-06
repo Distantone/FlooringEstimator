@@ -3,7 +3,10 @@ package Business;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -62,19 +65,13 @@ public class DataIO{
         this.totalCost = totalCost;
     }
 
-
-    
-    
-    
-    
-    public void saveData() throws SQLException{
+    public void saveData(Customer C) throws SQLException{
         DBConnector db = new DBConnector();
         Query query = new Query();
         //login information
         String login = db.getlogin();
         String password = db.getpassword();
         String url = db.geturl();
-        
         
         Connection conn = null;
         PreparedStatement insertStmt;
@@ -85,11 +82,11 @@ public class DataIO{
   
         insertStmt = conn.prepareStatement(insertQuery);
         //fill in the user data
-        insertStmt.setString(1, name);
-        insertStmt.setString(2, addr);
-        insertStmt.setString(3, fType);
-        insertStmt.setDouble(4, fArea);
-        insertStmt.setDouble(5, totalCost);
+        insertStmt.setString(1, C.getCustomerName());
+        insertStmt.setString(2, C.getCustomerAddr());
+        insertStmt.setString(3, C.getFloorType());
+        insertStmt.setDouble(4, C.getFloorArea());
+        insertStmt.setDouble(5, C.getFloorCost());
         //execute the insert statement
         insertStmt.execute();
         System.out.println("SUCESS New Row Added");
@@ -98,6 +95,42 @@ public class DataIO{
             conn.close();
     }
     
-    
+    public DefaultTableModel loadData() throws SQLException {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"CustomerName", "CustomerAddress", "FloorType", "FloorArea", "FloorCost"}, 0);
+        DBConnector db = new DBConnector();
+        Query query = new Query();
+        //login information
+        String login = db.getlogin();
+        String password = db.getpassword();
+        String url = db.geturl();
+        
+        Connection conn = null;
+        //set connection
+            conn = DriverManager.getConnection(url, login, password);
+        PreparedStatement insertStmt;
+        Statement stmt = conn.createStatement();
+        
+        
+        ResultSet rs;
+            rs = stmt.executeQuery(query.statementQuery());
+        
+        //set connection
+            conn = DriverManager.getConnection(url, login, password);
+            //gather user data
+            while ( rs.next() ) { 
+               String n = rs.getString("CustomerName");
+               String a = rs.getString("CustomerAddress");
+               String fT = rs.getString("FlooringType");
+               Double fA = rs.getDouble("FloorArea");
+               Double fC = rs.getDouble("FloorCost");
+               //create a model for proper layout of the table
+               model.addRow(new Object[]{n,a,fT,fA,fC});
+               
+               //System.out.println(n + a + fT + fA + fC + "");
+            }
+            conn.close();
+            
+            return model;
+    }
 }
 
