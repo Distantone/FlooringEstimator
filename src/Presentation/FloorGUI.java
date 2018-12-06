@@ -2,7 +2,6 @@ package Presentation;
 
 import Business.Customer;
 import Business.DataIO;
-import Business.Floor;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
