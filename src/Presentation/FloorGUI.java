@@ -397,6 +397,7 @@ import javax.swing.table.DefaultTableModel;
             }
         
         }   
+        txaOrderSummary.setText(cus.toString());
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
@@ -466,17 +467,6 @@ import javax.swing.table.DefaultTableModel;
 
         customerTable.setModel(mod);
     }//GEN-LAST:event_btnLoadActionPerformed
-
-    public void orderSum(String name,String addr,String fType, double fArea, double totalCost){
-        //displays customer data in order summary
-        txaOrderSummary.setText(
-        "Customer: " + name + "\n"
-        + "Customer Address: " + addr + "\n"       
-        + "Floor Type: " + fType +"\n"
-        + "Floor Area: " + fArea + "\n"
-        + "Floor Cost: " + totalCost + "\n"       
-        );
-    }
 
     /**
      * @param args the command line arguments

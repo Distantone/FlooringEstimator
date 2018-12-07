@@ -94,6 +94,16 @@ public class Customer {
     public void setFloorType(String floorType) {
         this.floorType = floorType;
     }
+
+    @Override
+    public String toString() {
+        return 
+        "Customer: " + customerName + "\n"
+        + "Customer Address: " + customerAddr + "\n"       
+        + "Floor Type: " + floorType +"\n"
+        + "Floor Area: " + getFloorArea() + "\n"
+        + "Floor Cost: " + getFloorCost() + "\n";
+    }
     
     
     
