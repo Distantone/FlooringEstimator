@@ -8,12 +8,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Payden Boughton
  */
-    public class FloorGUI extends javax.swing.JFrame {
+public class FloorGUI extends javax.swing.JFrame {
 
     public FloorGUI() {
         initComponents();
@@ -350,82 +349,80 @@ import javax.swing.table.DefaultTableModel;
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // DONE add your handling code here:
-           String floorType = "",cName = "",cAddr = "";
-               double myLength, myWidth;
+        String floorType = "", cName = "", cAddr = "";
+        double myLength, myWidth;
         myLength = Double.parseDouble(lenTextField.getText());
         myWidth = Double.parseDouble(widTextField.getText());
         cName = nameTextField.getText();
         cAddr = addrTextField.getText();
-        if (carpetRadBtn.isSelected()){
+        if (carpetRadBtn.isSelected()) {
             floorType = "Carpet";
         }
-        if (woodRadBtn.isSelected()){
-            floorType = "Wood"; 
-        } 
-        Customer cus = new Customer(cName,cAddr,floorType,myLength,myWidth);
+        if (woodRadBtn.isSelected()) {
+            floorType = "Wood";
+        }
+        Customer cus = new Customer(cName, cAddr, floorType, myLength, myWidth);
         //calculating area
         double floorArea = cus.getFloorArea();
-        
+
         //verifying area is calculated then moving on to check if all fields are entered
-        if(floorArea == 0){
+        if (floorArea == 0) {
             JOptionPane.showMessageDialog(rootPane, "Please Calulate your Total");
-        }
-        else{
-            if (nameTextField.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Must Enter a Name","Name is Missing",JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (nameTextField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Must Enter a Name", "Name is Missing", JOptionPane.ERROR_MESSAGE);
                 nameTextField.requestFocus();
                 return;
             }
-            if (addrTextField.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Must Enter an Address","Address is Missing",JOptionPane.ERROR_MESSAGE);
+            if (addrTextField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Must Enter an Address", "Address is Missing", JOptionPane.ERROR_MESSAGE);
                 addrTextField.requestFocus();
                 return;
             }
 
             //check if none are selected
-            if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()){
-                JOptionPane.showMessageDialog(null, "Please select A floor type","No Floor Type Selected",JOptionPane.ERROR_MESSAGE);
+            if (!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()) {
+                JOptionPane.showMessageDialog(null, "Please select A floor type", "No Floor Type Selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
-        DataIO data = new DataIO();
-        //save the data
-        try{
-        data.saveData(cus);
-        }   catch (SQLException ex) { 
+
+            DataIO data = new DataIO();
+            //save the data
+            try {
+                data.saveData(cus);
+            } catch (SQLException ex) {
                 Logger.getLogger(FloorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-        }   
+
+        }
         txaOrderSummary.setText(cus.toString());
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
         //links to github
-        try { 
-         String url = "https://github.com/Distantone/FlooringEstimator/tree/master/src";
-         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-       }
-       catch (java.io.IOException e) {
-           System.out.println(e.getMessage());
-       }
+        try {
+            String url = "https://github.com/Distantone/FlooringEstimator/tree/master/src";
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnGitActionPerformed
 
     private void btnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcActionPerformed
         // DONE add your handling code here:
-           String floorType;
-        
+        String floorType;
+
         //check for empty fields
-        if(!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()){
-            JOptionPane.showMessageDialog(null, "Please select A floor type","No Floor Type Selected",JOptionPane.ERROR_MESSAGE);
+        if (!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Please select A floor type", "No Floor Type Selected", JOptionPane.ERROR_MESSAGE);
         }
-        if (lenTextField.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter a Length","No Length Entered",JOptionPane.ERROR_MESSAGE);
+        if (lenTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please Enter a Length", "No Length Entered", JOptionPane.ERROR_MESSAGE);
             lenTextField.requestFocus();
             return;
         }
-        if (widTextField.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter a Length","No Length Entered",JOptionPane.ERROR_MESSAGE);
+        if (widTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please Enter a Length", "No Length Entered", JOptionPane.ERROR_MESSAGE);
             widTextField.requestFocus();
             return;
         }
@@ -438,11 +435,11 @@ import javax.swing.table.DefaultTableModel;
         //set everything up to be calculated
         cus.setLength(myLength);
         cus.setWidth(myWidth);
-        if (carpetRadBtn.isSelected()){
+        if (carpetRadBtn.isSelected()) {
             floorType = "Carpet";
             cus.setFloorType(floorType);
         }
-        if (woodRadBtn.isSelected()){
+        if (woodRadBtn.isSelected()) {
             floorType = "Wood";
             cus.setFloorType(floorType);
         }
@@ -460,7 +457,7 @@ import javax.swing.table.DefaultTableModel;
         DataIO data = new DataIO();
 
         try {
-            mod =  data.loadData();
+            mod = data.loadData();
         } catch (SQLException ex) {
             Logger.getLogger(FloorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -468,40 +465,40 @@ import javax.swing.table.DefaultTableModel;
         customerTable.setModel(mod);
     }//GEN-LAST:event_btnLoadActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /**
+         * @param args the command line arguments
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FloorGUI().setVisible(true);
-            }
-        });
-    }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new FloorGUI().setVisible(true);
+                }
+            });
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addrTextField;

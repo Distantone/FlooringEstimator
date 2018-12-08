@@ -18,8 +18,7 @@ public class Customer {
     private double width;
     private double floorArea;
     private double floorCost;
-    
-    
+
     public Customer() {
     }
 
@@ -30,8 +29,6 @@ public class Customer {
         this.length = length;
         this.width = width;
     }
-    
-
 
     public String getCustomerName() {
         return customerName;
@@ -64,10 +61,12 @@ public class Customer {
     public double getFloorCost() {
         String fType = getFloorType();
         double cost = 0;
-        if (fType == "Wood")
+        if (fType == "Wood") {
             cost = 20;
-        if(fType == "Carpet")
+        }
+        if (fType == "Carpet") {
             cost = 10;
+        }
         return getFloorArea() * cost;
     }
 
@@ -97,27 +96,11 @@ public class Customer {
 
     @Override
     public String toString() {
-        return 
-        "Customer: " + customerName + "\n"
-        + "Customer Address: " + customerAddr + "\n"       
-        + "Floor Type: " + floorType +"\n"
-        + "Floor Area: " + getFloorArea() + "\n"
-        + "Floor Cost: " + getFloorCost() + "\n";
+        return "Customer: " + customerName + "\n"
+                + "Customer Address: " + customerAddr + "\n"
+                + "Floor Type: " + floorType + "\n"
+                + "Floor Area: " + getFloorArea() + "\n"
+                + "Floor Cost: " + getFloorCost() + "\n";
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
