@@ -36,6 +36,7 @@ public class FloorGUI extends javax.swing.JFrame {
         lblAddr = new javax.swing.JLabel();
         addrTextField = new javax.swing.JTextField();
         nameTextField = new javax.swing.JTextField();
+        btnCusContinue = new javax.swing.JButton();
         jpFloorSelector = new javax.swing.JPanel();
         lblFloorType = new javax.swing.JLabel();
         woodRadBtn = new javax.swing.JRadioButton();
@@ -46,15 +47,17 @@ public class FloorGUI extends javax.swing.JFrame {
         lblLength = new javax.swing.JLabel();
         lblWidth = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jpOrder = new javax.swing.JPanel();
+        areaTextField = new javax.swing.JTextField();
+        lblFloorArea1 = new javax.swing.JLabel();
+        lblFloorCost1 = new javax.swing.JLabel();
         costTextField = new javax.swing.JTextField();
+        btnTypeBack = new javax.swing.JButton();
+        btnTypeContinue = new javax.swing.JButton();
+        jpOrder = new javax.swing.JPanel();
         btnOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaOrderSummary = new javax.swing.JTextArea();
         lblSummary = new javax.swing.JLabel();
-        areaTextField = new javax.swing.JTextField();
-        lblFloorArea = new javax.swing.JLabel();
-        lblFloorCost = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
@@ -72,6 +75,14 @@ public class FloorGUI extends javax.swing.JFrame {
         lblAddr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblAddr.setText("Please Enter Your Address");
 
+        btnCusContinue.setText("Continue");
+        btnCusContinue.setDoubleBuffered(true);
+        btnCusContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCusContinueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpCustomerInfoLayout = new javax.swing.GroupLayout(jpCustomerInfo);
         jpCustomerInfo.setLayout(jpCustomerInfoLayout);
         jpCustomerInfoLayout.setHorizontalGroup(
@@ -86,6 +97,10 @@ public class FloorGUI extends javax.swing.JFrame {
                     .addComponent(lblAddr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addrTextField))
                 .addGap(44, 44, 44))
+            .addGroup(jpCustomerInfoLayout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(btnCusContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpCustomerInfoLayout.setVerticalGroup(
             jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +113,9 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addGroup(jpCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCusContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         tPCustomer.addTab("Customer Information", jpCustomerInfo);
@@ -129,6 +146,32 @@ public class FloorGUI extends javax.swing.JFrame {
         lblWidth.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblWidth.setText("Enter Width");
 
+        areaTextField.setEditable(false);
+
+        lblFloorArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFloorArea1.setText("Floor Area");
+
+        lblFloorCost1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFloorCost1.setText("Floor Cost");
+
+        costTextField.setEditable(false);
+
+        btnTypeBack.setText("Back");
+        btnTypeBack.setDoubleBuffered(true);
+        btnTypeBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTypeBackActionPerformed(evt);
+            }
+        });
+
+        btnTypeContinue.setText("Continue");
+        btnTypeContinue.setDoubleBuffered(true);
+        btnTypeContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTypeContinueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpFloorSelectorLayout = new javax.swing.GroupLayout(jpFloorSelector);
         jpFloorSelector.setLayout(jpFloorSelectorLayout);
         jpFloorSelectorLayout.setHorizontalGroup(
@@ -136,30 +179,39 @@ public class FloorGUI extends javax.swing.JFrame {
             .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                         .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLength)
+                            .addGroup(jpFloorSelectorLayout.createSequentialGroup()
+                                .addGap(164, 164, 164)
+                                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(carpetRadBtn)
+                                    .addComponent(lblFloorType)
+                                    .addComponent(woodRadBtn)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFloorSelectorLayout.createSequentialGroup()
+                                .addComponent(lblLength)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2))
                             .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                                 .addComponent(lenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jpFloorSelectorLayout.createSequentialGroup()
+                                        .addComponent(btnTypeBack, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnTypeContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(36, 36, 36)
                                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpFloorSelectorLayout.createSequentialGroup()
-                                        .addGap(71, 71, 71)
-                                        .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(carpetRadBtn)
-                                            .addComponent(lblFloorType)
-                                            .addComponent(woodRadBtn)))
-                                    .addGroup(jpFloorSelectorLayout.createSequentialGroup()
-                                        .addGap(261, 261, 261)
-                                        .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblWidth)
-                                            .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 10, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jpFloorSelectorLayout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblWidth)
+                                    .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFloorCost1))))
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFloorSelectorLayout.createSequentialGroup()
+                        .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFloorArea1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpFloorSelectorLayout.setVerticalGroup(
             jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,28 +222,37 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addComponent(woodRadBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(carpetRadBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblLength)
+                        .addComponent(lblWidth)))
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLength)
-                    .addComponent(lblWidth))
-                .addGap(15, 15, 15)
-                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFloorArea1)
+                    .addComponent(lblFloorCost1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTypeBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTypeContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         tPCustomer.addTab("Floor Type Selector", jpFloorSelector);
 
-        costTextField.setEditable(false);
-
         btnOrder.setText("Place Order");
         btnOrder.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOrder.setPreferredSize(new java.awt.Dimension(90, 25));
+        btnOrder.setMaximumSize(new java.awt.Dimension(77, 23));
+        btnOrder.setMinimumSize(new java.awt.Dimension(77, 23));
+        btnOrder.setPreferredSize(new java.awt.Dimension(77, 23));
         btnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOrderActionPerformed(evt);
@@ -206,14 +267,6 @@ public class FloorGUI extends javax.swing.JFrame {
         lblSummary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSummary.setText("Order Summary");
 
-        areaTextField.setEditable(false);
-
-        lblFloorArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblFloorArea.setText("Floor Area");
-
-        lblFloorCost.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblFloorCost.setText("Floor Cost");
-
         javax.swing.GroupLayout jpOrderLayout = new javax.swing.GroupLayout(jpOrder);
         jpOrder.setLayout(jpOrderLayout);
         jpOrderLayout.setHorizontalGroup(
@@ -222,47 +275,30 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpOrderLayout.createSequentialGroup()
-                        .addComponent(lblFloorArea)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblFloorCost))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
-                        .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpOrderLayout.createSequentialGroup()
-                                .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jpOrderLayout.createSequentialGroup()
-                                .addGap(0, 168, Short.MAX_VALUE)
-                                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpOrderLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(lblSummary))
-                                    .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(71, 71, 71)))
-                        .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(0, 135, Short.MAX_VALUE)
+                        .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(142, 142, 142))))
+            .addGroup(jpOrderLayout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addComponent(lblSummary)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpOrderLayout.setVerticalGroup(
             jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFloorArea)
-                    .addComponent(lblFloorCost))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(lblSummary)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        tPCustomer.addTab("Order", jpOrder);
+        tPCustomer.addTab("Order Summary", jpOrder);
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -465,6 +501,43 @@ public class FloorGUI extends javax.swing.JFrame {
         customerTable.setModel(mod);
     }//GEN-LAST:event_btnLoadActionPerformed
 
+    private void btnCusContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusContinueActionPerformed
+        // Continue button on first page(tab)
+        if(evt.getSource() == btnCusContinue) {
+     // check if we are at zero //
+     if(tPCustomer.getSelectedIndex() == 0)
+       tPCustomer.setSelectedIndex( tPCustomer.getTabCount() - 3);
+     else
+       tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() -1);
+
+  }
+
+    }//GEN-LAST:event_btnCusContinueActionPerformed
+
+    private void btnTypeBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTypeBackActionPerformed
+        // back button on Floor type selector page
+        if(evt.getSource() == btnTypeBack) {
+     // check if we are at zero //
+     if(tPCustomer.getSelectedIndex() == 0)
+       tPCustomer.setSelectedIndex( tPCustomer.getTabCount() - 4);
+     else
+       tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() -1);
+
+  }
+    }//GEN-LAST:event_btnTypeBackActionPerformed
+
+    private void btnTypeContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTypeContinueActionPerformed
+        //  Continue button on Floor type selector page
+        if(evt.getSource() == btnTypeContinue) {
+     // check if we are at zero //
+     if(tPCustomer.getSelectedIndex() == 0)
+       tPCustomer.setSelectedIndex( tPCustomer.getTabCount() -1);
+     else
+       tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() +1);
+
+  }
+    }//GEN-LAST:event_btnTypeContinueActionPerformed
+
         /**
          * @param args the command line arguments
          */
@@ -504,10 +577,13 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JTextField addrTextField;
     private javax.swing.JTextField areaTextField;
     private javax.swing.JButton btnCalc;
+    private javax.swing.JButton btnCusContinue;
     private javax.swing.JMenuItem btnGit;
     private javax.swing.ButtonGroup btnGroupFloor;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnOrder;
+    private javax.swing.JButton btnTypeBack;
+    private javax.swing.JButton btnTypeContinue;
     private javax.swing.JRadioButton carpetRadBtn;
     private javax.swing.JTextField costTextField;
     private javax.swing.JTable customerTable;
@@ -521,8 +597,8 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jpFloorSelector;
     private javax.swing.JPanel jpOrder;
     private javax.swing.JLabel lblAddr;
-    private javax.swing.JLabel lblFloorArea;
-    private javax.swing.JLabel lblFloorCost;
+    private javax.swing.JLabel lblFloorArea1;
+    private javax.swing.JLabel lblFloorCost1;
     private javax.swing.JLabel lblFloorEstimatorLogo;
     private javax.swing.JLabel lblFloorType;
     private javax.swing.JLabel lblLength;
