@@ -89,7 +89,7 @@ public class DataIO {
         insertStmt.setDouble(5, C.getFloorCost());
         //execute the insert statement
         insertStmt.execute();
-        System.out.println("SUCESS New Row Added");
+        System.out.println("SUCCESS New Row Added");
 
         //close the connection to database
         conn.close();

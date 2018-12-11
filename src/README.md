@@ -34,8 +34,8 @@ JRE(Java Runetime Environment) 8 or higher
 
 Compile the source and run flooring.JAR
 
-### Debugging
-There is sufficient debugging code to check variables are passing between the GUI and the controller.
+### Manual
+Provided as PDF
 
 
 ## Built With
