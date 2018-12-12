@@ -11,6 +11,14 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuNewOrder">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New Order"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuNewOrderActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnExit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Exit"/>
@@ -353,8 +361,8 @@
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lenTextField" min="-2" pref="93" max="-2" attributes="0"/>
-                                                  <Component id="areaTextField" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="txfLength" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <Component id="txfArea" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
                                           </Group>
@@ -366,9 +374,9 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="costTextField" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Component id="txfCost" min="-2" pref="93" max="-2" attributes="0"/>
                                           <Component id="lblWidth" min="-2" max="-2" attributes="0"/>
-                                          <Component id="widTextField" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Component id="txfWidth" min="-2" pref="93" max="-2" attributes="0"/>
                                           <Component id="lblFloorCost1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -414,8 +422,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="widTextField" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="lenTextField" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txfWidth" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txfLength" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -427,8 +435,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="costTextField" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="areaTextField" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txfCost" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txfArea" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -481,9 +489,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="widTextField">
+            <Component class="javax.swing.JTextField" name="txfWidth">
             </Component>
-            <Component class="javax.swing.JTextField" name="lenTextField">
+            <Component class="javax.swing.JTextField" name="txfLength">
             </Component>
             <Component class="javax.swing.JLabel" name="lblLength">
               <Properties>
@@ -503,7 +511,7 @@
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator2">
             </Component>
-            <Component class="javax.swing.JTextField" name="areaTextField">
+            <Component class="javax.swing.JTextField" name="txfArea">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
@@ -524,7 +532,7 @@
                 <Property name="text" type="java.lang.String" value="Floor Cost"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="costTextField">
+            <Component class="javax.swing.JTextField" name="txfCost">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
@@ -579,9 +587,17 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" min="-2" pref="122" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -604,6 +620,8 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="162" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btnAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnLogout" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -693,6 +711,25 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
               </Events>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="jListCustomer">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="model" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListCustomerValueChanged"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Customer&gt;"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">

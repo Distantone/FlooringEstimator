@@ -3,8 +3,10 @@ package Presentation;
 import Business.Customer;
 import Business.DataIO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,9 +14,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Payden Boughton
  */
+    
 public class FloorGUI extends javax.swing.JFrame {
-
+    ArrayList<Customer> customerList;
+    DefaultListModel<Customer> model;
     public FloorGUI() {
+        model = new DefaultListModel<Customer> ();
+        customerList = new ArrayList<Customer> ();
         initComponents();
         //centers the GUI
         this.setLocationRelativeTo(null);
@@ -53,15 +59,15 @@ public class FloorGUI extends javax.swing.JFrame {
         woodRadBtn = new javax.swing.JRadioButton();
         carpetRadBtn = new javax.swing.JRadioButton();
         btnCalc = new javax.swing.JButton();
-        widTextField = new javax.swing.JTextField();
-        lenTextField = new javax.swing.JTextField();
+        txfWidth = new javax.swing.JTextField();
+        txfLength = new javax.swing.JTextField();
         lblLength = new javax.swing.JLabel();
         lblWidth = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        areaTextField = new javax.swing.JTextField();
+        txfArea = new javax.swing.JTextField();
         lblFloorArea1 = new javax.swing.JLabel();
         lblFloorCost1 = new javax.swing.JLabel();
-        costTextField = new javax.swing.JTextField();
+        txfCost = new javax.swing.JTextField();
         btnTypeBack = new javax.swing.JButton();
         btnTypeContinue = new javax.swing.JButton();
         lblFloorSelector = new javax.swing.JLabel();
@@ -73,6 +79,8 @@ public class FloorGUI extends javax.swing.JFrame {
         lblOrder = new javax.swing.JLabel();
         btnAdmin = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListCustomer = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
@@ -80,6 +88,7 @@ public class FloorGUI extends javax.swing.JFrame {
         btnLoad = new javax.swing.JButton();
         menuMain = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
+        jMenuNewOrder = new javax.swing.JMenuItem();
         btnExit = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         btnGit = new javax.swing.JMenuItem();
@@ -212,7 +221,7 @@ public class FloorGUI extends javax.swing.JFrame {
         lblWidth.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblWidth.setText("Enter Width");
 
-        areaTextField.setEditable(false);
+        txfArea.setEditable(false);
 
         lblFloorArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFloorArea1.setText("Floor Area");
@@ -220,7 +229,7 @@ public class FloorGUI extends javax.swing.JFrame {
         lblFloorCost1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFloorCost1.setText("Floor Cost");
 
-        costTextField.setEditable(false);
+        txfCost.setEditable(false);
 
         btnTypeBack.setText("Back");
         btnTypeBack.setDoubleBuffered(true);
@@ -268,8 +277,8 @@ public class FloorGUI extends javax.swing.JFrame {
                                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                                         .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txfLength, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txfArea, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(263, 263, 263))
                                     .addGroup(jpFloorSelectorLayout.createSequentialGroup()
                                         .addComponent(lblFloorArea1)
@@ -277,9 +286,9 @@ public class FloorGUI extends javax.swing.JFrame {
                                         .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(37, 37, 37)))
                                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfCost, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblWidth)
-                                    .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblFloorCost1))))
                         .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -312,8 +321,8 @@ public class FloorGUI extends javax.swing.JFrame {
                     .addComponent(lblWidth))
                 .addGap(18, 18, 18)
                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(widTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfLength, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -322,8 +331,8 @@ public class FloorGUI extends javax.swing.JFrame {
                     .addComponent(btnCalc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfCost, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpFloorSelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTypeBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,6 +378,14 @@ public class FloorGUI extends javax.swing.JFrame {
             }
         });
 
+        jListCustomer.setModel(model);
+        jListCustomer.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListCustomerValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jListCustomer);
+
         javax.swing.GroupLayout jpOrderLayout = new javax.swing.GroupLayout(jpOrder);
         jpOrder.setLayout(jpOrderLayout);
         jpOrderLayout.setHorizontalGroup(
@@ -382,9 +399,14 @@ public class FloorGUI extends javax.swing.JFrame {
                         .addComponent(lblSummary)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpOrderLayout.createSequentialGroup()
-                        .addComponent(btnAdmin)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLogout)
+                        .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpOrderLayout.createSequentialGroup()
+                                .addComponent(btnAdmin)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLogout))
+                            .addGroup(jpOrderLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(31, 31, 31)
                         .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpOrderLayout.createSequentialGroup()
@@ -400,6 +422,8 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpOrderLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAdmin)
                             .addComponent(btnLogout)))
@@ -464,6 +488,14 @@ public class FloorGUI extends javax.swing.JFrame {
 
         menuFile.setText("File");
 
+        jMenuNewOrder.setText("New Order");
+        jMenuNewOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuNewOrderActionPerformed(evt);
+            }
+        });
+        menuFile.add(jMenuNewOrder);
+
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,8 +548,8 @@ public class FloorGUI extends javax.swing.JFrame {
         // DONE add your handling code here:
         String floorType = "", cName = "", cAddr = "";
         double myLength, myWidth;
-        myLength = Double.parseDouble(lenTextField.getText());
-        myWidth = Double.parseDouble(widTextField.getText());
+        myLength = Double.parseDouble(txfLength.getText());
+        myWidth = Double.parseDouble(txfWidth.getText());
         //start Customer name String
 
         StringBuilder customerStr = new StringBuilder();
@@ -584,7 +616,6 @@ public class FloorGUI extends javax.swing.JFrame {
             }
 
         }
-        txaOrderSummary.setText(cus.toString());
         //reload table data with new data
         Ldata();
     }//GEN-LAST:event_btnOrderActionPerformed
@@ -609,22 +640,22 @@ public class FloorGUI extends javax.swing.JFrame {
         if (!carpetRadBtn.isSelected() && !woodRadBtn.isSelected()) {
             JOptionPane.showMessageDialog(null, "Please select A floor type", "No Floor Type Selected", JOptionPane.ERROR_MESSAGE);
         }
-        if (lenTextField.getText().isEmpty()) {
+        if (txfLength.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please Enter a Length", "No Length Entered", JOptionPane.ERROR_MESSAGE);
-            lenTextField.requestFocus();
+            txfLength.requestFocus();
             return;
         }
-        if (widTextField.getText().isEmpty()) {
+        if (txfWidth.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please Enter a Length", "No Length Entered", JOptionPane.ERROR_MESSAGE);
-            widTextField.requestFocus();
+            txfWidth.requestFocus();
             return;
         }
         Customer cus = new Customer();
         double myLength, myWidth;
 
         //grab myLength and myWidth from the textfields then convert string to double on mylength and myWidth
-        myLength = Double.parseDouble(lenTextField.getText());
-        myWidth = Double.parseDouble(widTextField.getText());
+        myLength = Double.parseDouble(txfLength.getText());
+        myWidth = Double.parseDouble(txfWidth.getText());
         //set everything up to be calculated
         cus.setLength(myLength);
         cus.setWidth(myWidth);
@@ -636,10 +667,10 @@ public class FloorGUI extends javax.swing.JFrame {
             floorType = "Wood";
             cus.setFloorType(floorType);
         }
-        areaTextField.setText("" + cus.getFloorArea());
+        txfArea.setText("" + cus.getFloorArea());
         String TotalAsString = String.format("%.2f", cus.getFloorCost());
         //set the total
-        costTextField.setText("$" + TotalAsString);
+        txfCost.setText("$" + TotalAsString);
 
     }//GEN-LAST:event_btnCalcActionPerformed
 
@@ -722,6 +753,28 @@ public class FloorGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void jListCustomerValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListCustomerValueChanged
+        // TODO add your handling code here:
+        Customer cus = jListCustomer.getSelectedValue();
+        if (cus != null)
+        {
+          
+            txaOrderSummary.setText(cus.StingIT());
+        }
+    }//GEN-LAST:event_jListCustomerValueChanged
+
+    private void jMenuNewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNewOrderActionPerformed
+        // TODO add your handling code here:
+        txfAddr.setText("");
+        txfArea.setText("");
+        txfCity.setText("");
+        txfCost.setText("");
+        txfFName.setText("");
+        txfLName.setText("");
+        txfLength.setText("");
+        txfWidth.setText("");
+    }//GEN-LAST:event_jMenuNewOrderActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -758,7 +811,6 @@ public class FloorGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField areaTextField;
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnCalc;
     private javax.swing.JButton btnCusContinue;
@@ -772,12 +824,14 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnTypeContinue;
     private javax.swing.JRadioButton carpetRadBtn;
     private javax.swing.JComboBox<String> cbState;
-    private javax.swing.JTextField costTextField;
     private javax.swing.JTable customerTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<Customer> jListCustomer;
+    private javax.swing.JMenuItem jMenuNewOrder;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel jpCustomerInfo;
     private javax.swing.JPanel jpFloorSelector;
@@ -796,17 +850,19 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblSummary;
     private javax.swing.JLabel lblWidth;
-    private javax.swing.JTextField lenTextField;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuBar menuMain;
     private javax.swing.JTabbedPane tPCustomer;
     private javax.swing.JTextArea txaOrderSummary;
     private javax.swing.JTextField txfAddr;
+    private javax.swing.JTextField txfArea;
     private javax.swing.JTextField txfCity;
+    private javax.swing.JTextField txfCost;
     private javax.swing.JTextField txfFName;
     private javax.swing.JTextField txfLName;
-    private javax.swing.JTextField widTextField;
+    private javax.swing.JTextField txfLength;
+    private javax.swing.JTextField txfWidth;
     private javax.swing.JRadioButton woodRadBtn;
     // End of variables declaration//GEN-END:variables
 
@@ -829,13 +885,13 @@ public class FloorGUI extends javax.swing.JFrame {
     }
 
     private void orderSum() {
-        if (areaTextField.getText().isEmpty()) {
+        if (txfArea.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Please Enter all information and Calculate your total.");
         } else {
             String floorType = "", cName = "", cAddr = "";
             double myLength, myWidth;
-            myLength = Double.parseDouble(lenTextField.getText());
-            myWidth = Double.parseDouble(widTextField.getText());
+            myLength = Double.parseDouble(txfLength.getText());
+            myWidth = Double.parseDouble(txfWidth.getText());
             //start Customer name String
 
             StringBuilder customerStr = new StringBuilder();
@@ -860,7 +916,9 @@ public class FloorGUI extends javax.swing.JFrame {
             Customer cus = new Customer(cName, cAddr, floorType, myLength, myWidth);
             //calculating area
             double floorArea = cus.getFloorArea();
-            txaOrderSummary.setText(cus.toString());
+            //txaOrderSummary.setText(cus.toString());
+            model.addElement(cus);
+            customerList.add(cus);
         }
     }
 }
