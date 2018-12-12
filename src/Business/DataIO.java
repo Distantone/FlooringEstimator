@@ -126,6 +126,7 @@ public class DataIO {
 
             //System.out.println(n + a + fT + fA + fC + "");
         }
+        //close connection
         conn.close();
 
         return model;

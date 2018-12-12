@@ -29,6 +29,7 @@ public class Customer {
         this.length = length;
         this.width = width;
     }
+//getters and setters
 
     public String getCustomerName() {
         return customerName;

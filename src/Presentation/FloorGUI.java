@@ -20,6 +20,7 @@ public class FloorGUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         //load initial table data
         Ldata();
+        //lock order table tab
         secur();
     }
 
@@ -70,24 +71,21 @@ public class FloorGUI extends javax.swing.JFrame {
         txaOrderSummary = new javax.swing.JTextArea();
         lblSummary = new javax.swing.JLabel();
         lblOrder = new javax.swing.JLabel();
-        btnADMIN = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
         lblFloorEstimatorLogo = new javax.swing.JLabel();
         btnLoad = new javax.swing.JButton();
-        jMenuBar = new javax.swing.JMenuBar();
-        jMenu = new javax.swing.JMenu();
+        menuMain = new javax.swing.JMenuBar();
+        menuFile = new javax.swing.JMenu();
+        btnExit = new javax.swing.JMenuItem();
+        menuHelp = new javax.swing.JMenu();
         btnGit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Floor Estimator");
-
-        tPCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tPCustomerMouseClicked(evt);
-            }
-        });
 
         lblFName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFName.setText("First Name");
@@ -181,7 +179,7 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addComponent(lblState)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(btnCusContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -357,10 +355,17 @@ public class FloorGUI extends javax.swing.JFrame {
         lblOrder.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblOrder.setText("Order");
 
-        btnADMIN.setText("Admin Access");
-        btnADMIN.addActionListener(new java.awt.event.ActionListener() {
+        btnAdmin.setText("Admin Access");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnADMINActionPerformed(evt);
+                btnAdminActionPerformed(evt);
+            }
+        });
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
             }
         });
 
@@ -377,11 +382,13 @@ public class FloorGUI extends javax.swing.JFrame {
                         .addComponent(lblSummary)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpOrderLayout.createSequentialGroup()
-                        .addComponent(btnADMIN)
-                        .addGap(122, 122, 122)
+                        .addComponent(btnAdmin)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLogout)
+                        .addGap(31, 31, 31)
                         .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpOrderLayout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(jpOrderLayout.createSequentialGroup()
                                 .addComponent(lblOrder)
@@ -389,21 +396,23 @@ public class FloorGUI extends javax.swing.JFrame {
         );
         jpOrderLayout.setVerticalGroup(
             jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpOrderLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(lblOrder)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
                 .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSummary))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOrderLayout.createSequentialGroup()
-                        .addComponent(btnADMIN)
-                        .addGap(25, 25, 25))))
+                    .addGroup(jpOrderLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdmin)
+                            .addComponent(btnLogout)))
+                    .addGroup(jpOrderLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(lblOrder)
+                        .addGap(18, 18, 18)
+                        .addGroup(jpOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSummary))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         tPCustomer.addTab("Order Summary", jpOrder);
@@ -437,7 +446,7 @@ public class FloorGUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
         );
 
         tPCustomer.addTab("Order Table", jPanel1);
@@ -453,7 +462,19 @@ public class FloorGUI extends javax.swing.JFrame {
             }
         });
 
-        jMenu.setText("Help");
+        menuFile.setText("File");
+
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        menuFile.add(btnExit);
+
+        menuMain.add(menuFile);
+
+        menuHelp.setText("Help");
 
         btnGit.setText("Git ReadMe");
         btnGit.addActionListener(new java.awt.event.ActionListener() {
@@ -461,11 +482,11 @@ public class FloorGUI extends javax.swing.JFrame {
                 btnGitActionPerformed(evt);
             }
         });
-        jMenu.add(btnGit);
+        menuHelp.add(btnGit);
 
-        jMenuBar.add(jMenu);
+        menuMain.add(menuHelp);
 
-        setJMenuBar(jMenuBar);
+        setJMenuBar(menuMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -476,7 +497,7 @@ public class FloorGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLoad)
                 .addContainerGap())
-            .addComponent(tPCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(tPCustomer)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,19 +519,18 @@ public class FloorGUI extends javax.swing.JFrame {
         myLength = Double.parseDouble(lenTextField.getText());
         myWidth = Double.parseDouble(widTextField.getText());
         //start Customer name String
-        
+
         StringBuilder customerStr = new StringBuilder();
         customerStr.append(txfFName.getText());
         customerStr.append(" " + txfLName.getText());
-        
-        
+
         //start address string
         StringBuilder addrStr = new StringBuilder();
-       
+
         addrStr.append(txfAddr.getText());
         addrStr.append(" " + txfCity.getText());
         addrStr.append(" " + cbState.getSelectedItem());
-         
+
         cName = customerStr.toString();
         cAddr = addrStr.toString();
         if (carpetRadBtn.isSelected()) {
@@ -537,7 +557,7 @@ public class FloorGUI extends javax.swing.JFrame {
                 txfLName.requestFocus();
                 return;
             }
-            
+
             if (txfAddr.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Must Enter an Address", "Address is Missing", JOptionPane.ERROR_MESSAGE);
                 txfAddr.requestFocus();
@@ -572,7 +592,9 @@ public class FloorGUI extends javax.swing.JFrame {
     private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
         //links to github
         try {
+            //designate url
             String url = "https://github.com/Distantone/FlooringEstimator/tree/master/src";
+            //get browser and open url
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (java.io.IOException e) {
             System.out.println(e.getMessage());
@@ -637,103 +659,114 @@ public class FloorGUI extends javax.swing.JFrame {
 
     private void btnCusContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusContinueActionPerformed
         // Continue button on first page(tab)
-        if(evt.getSource() == btnCusContinue) {
-     // check if we are at zero //
-     if(tPCustomer.getSelectedIndex() == 0)
-       tPCustomer.setSelectedIndex( tPCustomer.getTabCount() - 3);
-     else
-       tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() -1);
+        if (evt.getSource() == btnCusContinue) {
+            // check if we are at zero //
+            if (tPCustomer.getSelectedIndex() == 0) {
+                tPCustomer.setSelectedIndex(tPCustomer.getTabCount() - 3);
+            } else {
+                tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() - 1);
+            }
 
-  }
+        }
 
     }//GEN-LAST:event_btnCusContinueActionPerformed
 
     private void btnTypeBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTypeBackActionPerformed
         // back button on Floor type selector page
-        if(evt.getSource() == btnTypeBack) {
-     // check if we are at zero //
-     if(tPCustomer.getSelectedIndex() == 0)
-       tPCustomer.setSelectedIndex( tPCustomer.getTabCount() - 4);
-     else
-       tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() -1);
+        if (evt.getSource() == btnTypeBack) {
+            // check if we are at zero //
+            if (tPCustomer.getSelectedIndex() == 0) {
+                tPCustomer.setSelectedIndex(tPCustomer.getTabCount() - 4);
+            } else {
+                tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() - 1);
+            }
 
-  }
+        }
     }//GEN-LAST:event_btnTypeBackActionPerformed
 
     private void btnTypeContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTypeContinueActionPerformed
         //  Continue button on Floor type selector page
-        if(evt.getSource() == btnTypeContinue) {
-     // check if we are at zero //
-     if(tPCustomer.getSelectedIndex() == 0)
-       tPCustomer.setSelectedIndex( tPCustomer.getTabCount() -1);
-     else
-       tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() +1);
+        if (evt.getSource() == btnTypeContinue) {
+            // check if we are at zero //
+            if (tPCustomer.getSelectedIndex() == 0) {
+                tPCustomer.setSelectedIndex(tPCustomer.getTabCount() - 1);
+            } else {
+                tPCustomer.setSelectedIndex(tPCustomer.getSelectedIndex() + 1);
+            }
 
-  }
+            orderSum();
+
+        }
     }//GEN-LAST:event_btnTypeContinueActionPerformed
 
-    private void tPCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tPCustomerMouseClicked
-
-    }//GEN-LAST:event_tPCustomerMouseClicked
-
-    private void btnADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnADMINActionPerformed
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         //access orderTable
         String admin = JOptionPane.showInputDialog(this, "Enter User Name");
         String adminPass = JOptionPane.showInputDialog(this, "Enter Password");
-        if(admin.equals("Payden") && adminPass.equals("testing"))
-        {
-         int index = tPCustomer.indexOfTab("Order Table");
-        tPCustomer.setEnabledAt(index,true);
+        if (admin.equals("Payden") && adminPass.equals("testing")) {
+            int index = tPCustomer.indexOfTab("Order Table");
+            tPCustomer.setEnabledAt(index, true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "ERROR INVALID PASSWORD", "ACCESS DENIED!", JOptionPane.ERROR_MESSAGE);
         }
-        else
-        {
-            JOptionPane.showMessageDialog(rootPane, "ERROR INVALID PASSWORD","ACCESS DENIED!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnADMINActionPerformed
+    }//GEN-LAST:event_btnAdminActionPerformed
 
-        /**
-         * @param args the command line arguments
-         */
-        public static void main(String args[]) {
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        int index = tPCustomer.indexOfTab("Order Table");
+        tPCustomer.setEnabledAt(index, false);
+        JOptionPane.showMessageDialog(rootPane, "Logout Successful!");
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-             */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-            } catch (ClassNotFoundException ex) {
-                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            //</editor-fold>
-
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new FloorGUI().setVisible(true);
-                }
-            });
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FloorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FloorGUI().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField areaTextField;
-    private javax.swing.JButton btnADMIN;
+    private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnCalc;
     private javax.swing.JButton btnCusContinue;
+    private javax.swing.JMenuItem btnExit;
     private javax.swing.JMenuItem btnGit;
     private javax.swing.ButtonGroup btnGroupFloor;
     private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnTypeBack;
     private javax.swing.JButton btnTypeContinue;
@@ -742,8 +775,6 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JTextField costTextField;
     private javax.swing.JTable customerTable;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu;
-    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -766,6 +797,9 @@ public class FloorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblSummary;
     private javax.swing.JLabel lblWidth;
     private javax.swing.JTextField lenTextField;
+    private javax.swing.JMenu menuFile;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenuBar menuMain;
     private javax.swing.JTabbedPane tPCustomer;
     private javax.swing.JTextArea txaOrderSummary;
     private javax.swing.JTextField txfAddr;
@@ -791,8 +825,42 @@ public class FloorGUI extends javax.swing.JFrame {
 
     private void secur() {
         int index = tPCustomer.indexOfTab("Order Table");
-        tPCustomer.setEnabledAt(index,false);
-        
-        
+        tPCustomer.setEnabledAt(index, false);
+    }
+
+    private void orderSum() {
+        if (areaTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please Enter all information and Calculate your total.");
+        } else {
+            String floorType = "", cName = "", cAddr = "";
+            double myLength, myWidth;
+            myLength = Double.parseDouble(lenTextField.getText());
+            myWidth = Double.parseDouble(widTextField.getText());
+            //start Customer name String
+
+            StringBuilder customerStr = new StringBuilder();
+            customerStr.append(txfFName.getText());
+            customerStr.append(" " + txfLName.getText());
+
+            //start address string
+            StringBuilder addrStr = new StringBuilder();
+
+            addrStr.append(txfAddr.getText());
+            addrStr.append(" " + txfCity.getText());
+            addrStr.append(" " + cbState.getSelectedItem());
+
+            cName = customerStr.toString();
+            cAddr = addrStr.toString();
+            if (carpetRadBtn.isSelected()) {
+                floorType = "Carpet";
+            }
+            if (woodRadBtn.isSelected()) {
+                floorType = "Wood";
+            }
+            Customer cus = new Customer(cName, cAddr, floorType, myLength, myWidth);
+            //calculating area
+            double floorArea = cus.getFloorArea();
+            txaOrderSummary.setText(cus.toString());
+        }
     }
 }

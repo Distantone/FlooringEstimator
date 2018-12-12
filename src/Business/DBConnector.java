@@ -16,10 +16,9 @@ public class DBConnector {
     /*
  //my local database
 private final String login = "root";
-private final String password = "mylove922";
+private final String password = "";
 private final String url = "jdbc:mysql://localhost:3306/cis355a";
      */
-
     public DBConnector() {
     }
 
