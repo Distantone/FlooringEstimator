@@ -5,6 +5,8 @@
  */
 package Business;
 
+import java.text.NumberFormat;
+
 /**
  *
  * @author dista
@@ -60,6 +62,7 @@ public class Customer {
     }
 
     public double getFloorCost() {
+        
         String fType = getFloorType();
         double cost = 0;
         if (fType == "Wood") {
@@ -96,11 +99,12 @@ public class Customer {
     }
     
     public String StingIT() {
+        NumberFormat fmt = NumberFormat.getCurrencyInstance();
         return customerName + "\n"
              + customerAddr + "\n"
              + floorType + "\n"
              + getFloorArea() + "\n"
-             + getFloorCost() + "\n";
+             + fmt.format(getFloorCost()) + "\n";
     }
 
     @Override

@@ -1,3 +1,12 @@
+/**************************************************** 
+Program Name: FlooringEstimator.java
+Programmer's Name: Payden Boughton 
+Program Description: Uses customer input to calculate, display, and save to MYSQL database, 
+customer information and the calculated area and total cost of a floor 
+***********************************************************/
+
+
+
 package Presentation;
 
 import Business.Customer;
@@ -10,10 +19,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Payden Boughton
- */
+
     
 public class FloorGUI extends javax.swing.JFrame {
     ArrayList<Customer> customerList;
@@ -606,11 +612,11 @@ public class FloorGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please select A floor type", "No Floor Type Selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
             DataIO data = new DataIO();
             //save the data
             try {
                 data.saveData(cus);
+                JOptionPane.showMessageDialog(null, cus.toString() + " Has successfully been added to the database!");
             } catch (SQLException ex) {
                 Logger.getLogger(FloorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -667,7 +673,9 @@ public class FloorGUI extends javax.swing.JFrame {
             floorType = "Wood";
             cus.setFloorType(floorType);
         }
+        //get customer floor area and set to txfArea
         txfArea.setText("" + cus.getFloorArea());
+        //proper currency format (could have used a floorcost.toString, but decided not to
         String TotalAsString = String.format("%.2f", cus.getFloorCost());
         //set the total
         txfCost.setText("$" + TotalAsString);
@@ -678,13 +686,13 @@ public class FloorGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel mod = new DefaultTableModel(new String[]{"CustomerName", "CustomerAddress", "FloorType", "FloorArea", "FloorCost"}, 0);
         DataIO data = new DataIO();
-
+        //loading data to table
         try {
             mod = data.loadData();
         } catch (SQLException ex) {
             Logger.getLogger(FloorGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        //populating table with data
         customerTable.setModel(mod);
     }//GEN-LAST:event_btnLoadActionPerformed
 
